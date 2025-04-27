@@ -1,3 +1,8 @@
+# unsafe_prompt_dataset images
+unsafe_prompt_dataset/images/*
+unsafe_prompt_dataset/labels.xlsx
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,intellij+all,vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,python,intellij+all,vim
 

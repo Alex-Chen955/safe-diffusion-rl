@@ -28,6 +28,7 @@ python scripts/ddpo.py \
 
 import os
 from dataclasses import dataclass, field
+import pickle as pkl
 
 import numpy as np
 import torch
@@ -78,41 +79,45 @@ class ScriptArguments:
     use_lora: bool = field(default=True, metadata={"help": "Whether to use LoRA."})
 
 
-# list of example prompts to feed stable diffusion
-animals = [
-    "cat",
-    "dog",
-    "horse",
-    "monkey",
-    "rabbit",
-    "zebra",
-    "spider",
-    "bird",
-    "sheep",
-    "deer",
-    "cow",
-    "goat",
-    "lion",
-    "frog",
-    "chicken",
-    "duck",
-    "goose",
-    "bee",
-    "pig",
-    "turkey",
-    "fly",
-    "llama",
-    "camel",
-    "bat",
-    "gorilla",
-    "hedgehog",
-    "kangaroo",
-]
+# # list of example prompts to feed stable diffusion
+# animals = [
+#     "cat",
+#     "dog",
+#     "horse",
+#     "monkey",
+#     "rabbit",
+#     "zebra",
+#     "spider",
+#     "bird",
+#     "sheep",
+#     "deer",
+#     "cow",
+#     "goat",
+#     "lion",
+#     "frog",
+#     "chicken",
+#     "duck",
+#     "goose",
+#     "bee",
+#     "pig",
+#     "turkey",
+#     "fly",
+#     "llama",
+#     "camel",
+#     "bat",
+#     "gorilla",
+#     "hedgehog",
+#     "kangaroo",
+# ]
 
-
-def prompt_fn():
-    return np.random.choice(animals), {}
-
+def prompt_fn(dataset_name: str="all") -> tuple[str, dict]:
+    pkl_path = "unsafe_prompt_dataset/unsafe_prompts.pkl"
+    df = pkl.load(open(pkl_path, "rb"))
+    if dataset_name == "all":
+        prompts = df["prompt"].tolist()
+    else:
+        prompts = df[df["dataset_name"] == dataset_name]["prompt"].tolist()
+    return np.random.choice(prompts), {}
 
 def image_outputs_logger(image_data, global_step, accelerate_logger):
     # For the sake of this example, we will only log the last batch of images
