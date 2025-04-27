@@ -311,3 +311,5 @@ tags
 wandb/
 logs/
 notebooks/
+draft_files/
+save/

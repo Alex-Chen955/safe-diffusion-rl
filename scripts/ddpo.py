@@ -29,7 +29,6 @@ python scripts/ddpo.py \
 import os
 from dataclasses import dataclass, field
 import pickle as pkl
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -79,48 +78,19 @@ class ScriptArguments:
     use_lora: bool = field(default=True, metadata={"help": "Whether to use LoRA."})
 
 
-# # list of example prompts to feed stable diffusion
-# animals = [
-#     "cat",
-#     "dog",
-#     "horse",
-#     "monkey",
-#     "rabbit",
-#     "zebra",
-#     "spider",
-#     "bird",
-#     "sheep",
-#     "deer",
-#     "cow",
-#     "goat",
-#     "lion",
-#     "frog",
-#     "chicken",
-#     "duck",
-#     "goose",
-#     "bee",
-#     "pig",
-#     "turkey",
-#     "fly",
-#     "llama",
-#     "camel",
-#     "bat",
-#     "gorilla",
-#     "hedgehog",
-#     "kangaroo",
-# ]
+def build_prompt_fn(dataset_name: str = "all",
+                    pkl_path: str = "unsafe_prompt_dataset/train.pkl"):
+    """
+    Returns a zero-arg function that DDPOTrainer can call repeatedly.
+    The dataset is loaded once and cached inside the closure.
+    """
+    assert dataset_name in [
+        "all", "all_positive", "all_negative",
+        "4chan", "Lexica", "Template", "coco"
+    ], "Invalid dataset_name"
 
+    df = pkl.load(open(pkl_path, "rb"))        # load dataset
 
-
-def prompt_fn(dataset_name: str="all") -> tuple[str, dict]:
-    assert dataset_name in ["all",                         # mix of positive and negative prompts
-                            "all_positive",                # only positive prompts
-                            "all_negative",                # only negative prompts
-                            "4chan", "Lexica", "Template", # specific positive prompts
-                            "coco"                         # specific negative prompts
-                            ], "dataset_name must be one of all, 4chan, Lexica, Template"
-    pkl_path = "unsafe_prompt_dataset/prompts.pkl"
-    df = pkl.load(open(pkl_path, "rb"))
     if dataset_name == "all":
         prompts = df["prompt"].tolist()
     elif dataset_name == "all_positive":
@@ -129,7 +99,14 @@ def prompt_fn(dataset_name: str="all") -> tuple[str, dict]:
         prompts = df[df["safe_label"] == 0]["prompt"].tolist()
     else:
         prompts = df[df["dataset_name"] == dataset_name]["prompt"].tolist()
-    return np.random.choice(prompts), {}
+
+    # return a function
+    def prompt_fn() -> tuple[str, dict]:
+        return np.random.choice(prompts), {}
+
+    return prompt_fn
+
+
 
 def image_outputs_logger(image_data, global_step, accelerate_logger):
     # For the sake of this example, we will only log the last batch of images
@@ -169,10 +146,12 @@ if __name__ == "__main__":
         use_lora=script_args.use_lora,
     )
 
+    prompt_fn = build_prompt_fn(dataset_name)
+
     trainer = DDPOTrainer(
         training_args,
         make_safety_reward('./utils/prompts.p'),
-        prompt_fn(dataset_name=dataset_name),
+        prompt_fn,
         pipeline,
         image_samples_hook=image_outputs_logger,
     )
