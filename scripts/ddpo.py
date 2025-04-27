@@ -113,11 +113,20 @@ class ScriptArguments:
 
 
 def prompt_fn(dataset_name: str="all") -> tuple[str, dict]:
-    assert dataset_name in ["all", "4chan", "Lexica", "Template"], "dataset_name must be one of all, 4chan, Lexica, Template"
-    pkl_path = "unsafe_prompt_dataset/unsafe_prompts.pkl"
+    assert dataset_name in ["all",                         # mix of positive and negative prompts
+                            "all_positive",                # only positive prompts
+                            "all_negative",                # only negative prompts
+                            "4chan", "Lexica", "Template", # specific positive prompts
+                            "coco"                         # specific negative prompts
+                            ], "dataset_name must be one of all, 4chan, Lexica, Template"
+    pkl_path = "unsafe_prompt_dataset/prompts.pkl"
     df = pkl.load(open(pkl_path, "rb"))
     if dataset_name == "all":
         prompts = df["prompt"].tolist()
+    elif dataset_name == "all_positive":
+        prompts = df[df["safe_label"] == 1]["prompt"].tolist()
+    elif dataset_name == "all_negative":
+        prompts = df[df["safe_label"] == 0]["prompt"].tolist()
     else:
         prompts = df[df["dataset_name"] == dataset_name]["prompt"].tolist()
     return np.random.choice(prompts), {}
@@ -141,7 +150,8 @@ def image_outputs_logger(image_data, global_step, accelerate_logger):
 
 if __name__ == "__main__":
     # dataset name
-    dataset_name = "all" # change to 4chan, Lexica, Template
+    # dataset_name_list = ["all", "all_positive", "all_negative", "4chan", "Lexica", "Template", "coco"]
+    dataset_name = "all"
     parser = HfArgumentParser((ScriptArguments, DDPOConfig))
     script_args, training_args = parser.parse_args_into_dataclasses()
     
