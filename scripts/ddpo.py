@@ -110,7 +110,10 @@ class ScriptArguments:
 #     "kangaroo",
 # ]
 
+
+
 def prompt_fn(dataset_name: str="all") -> tuple[str, dict]:
+    assert dataset_name in ["all", "4chan", "Lexica", "Template"], "dataset_name must be one of all, 4chan, Lexica, Template"
     pkl_path = "unsafe_prompt_dataset/unsafe_prompts.pkl"
     df = pkl.load(open(pkl_path, "rb"))
     if dataset_name == "all":
@@ -137,13 +140,17 @@ def image_outputs_logger(image_data, global_step, accelerate_logger):
 
 
 if __name__ == "__main__":
+    # dataset name
+    dataset_name = "all"
     parser = HfArgumentParser((ScriptArguments, DDPOConfig))
     script_args, training_args = parser.parse_args_into_dataclasses()
+    
+    # add dataset name to training args
     training_args.project_kwargs = {
-        "logging_dir": "./logs",
+        "logging_dir": f"./logs/{dataset_name}",
         "automatic_checkpoint_naming": True,
         "total_limit": 5,
-        "project_dir": "./save",
+        "project_dir": f"./save/{dataset_name}",
     }
 
     pipeline = DefaultDDPOStableDiffusionPipeline(
@@ -155,7 +162,7 @@ if __name__ == "__main__":
     trainer = DDPOTrainer(
         training_args,
         make_safety_reward('./utils/prompts.p'),
-        prompt_fn,
+        prompt_fn(dataset_name=dataset_name),
         pipeline,
         image_samples_hook=image_outputs_logger,
     )
