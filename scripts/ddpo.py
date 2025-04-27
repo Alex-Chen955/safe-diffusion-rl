@@ -141,7 +141,7 @@ def image_outputs_logger(image_data, global_step, accelerate_logger):
 
 if __name__ == "__main__":
     # dataset name
-    dataset_name = "all"
+    dataset_name = "all" # change to 4chan, Lexica, Template
     parser = HfArgumentParser((ScriptArguments, DDPOConfig))
     script_args, training_args = parser.parse_args_into_dataclasses()
     
