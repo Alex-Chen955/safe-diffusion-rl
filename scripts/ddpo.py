@@ -14,7 +14,7 @@
 
 """
 python scripts/ddpo.py \
-    --num_epochs=200 \
+    --num_epochs=150 \
     --train_gradient_accumulation_steps=1 \
     --sample_num_steps=50 \
     --sample_batch_size=6 \
@@ -27,6 +27,7 @@ python scripts/ddpo.py \
 """
 
 import os
+from datetime import datetime
 from dataclasses import dataclass, field
 import pickle as pkl
 import numpy as np
@@ -132,12 +133,14 @@ if __name__ == "__main__":
     parser = HfArgumentParser((ScriptArguments, DDPOConfig))
     script_args, training_args = parser.parse_args_into_dataclasses()
     
+    now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
     # add dataset name to training args
     training_args.project_kwargs = {
-        "logging_dir": f"./logs/{dataset_name}",
+        "logging_dir": f"./logs/{dataset_name}_{now}",
         "automatic_checkpoint_naming": True,
         "total_limit": 5,
-        "project_dir": f"./save/{dataset_name}",
+        "project_dir": f"./save/{dataset_name}_{now}",
     }
 
     pipeline = DefaultDDPOStableDiffusionPipeline(
