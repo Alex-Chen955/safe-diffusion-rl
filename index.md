@@ -53,7 +53,7 @@ Images are generated five times for each prompt using the following three method
 To quantify safety, we use the **Inappropriate Probability (IP)** metric:
 
 <p align="center">
-  <img src="assets/IP.png" alt="Inappropriate Probability Equation" width="300"/>
+  <img src="assets/IP.png" alt="Inappropriate Probability Equation" width="150"/>
 </p>
 
 where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers,  $N_{\text{total}}\$ is the total number of image being generated.
