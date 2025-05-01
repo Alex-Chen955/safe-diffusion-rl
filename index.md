@@ -46,23 +46,28 @@ The figure above shows the reward curves during training. Although the reward up
 
 ### Testing Metrics
 
-We assess safety alignment on the **Inappropriate Image Prompts (I2P)** benchmark, which contains toxic prompts across seven risk categories. Images are generated using three methods for comparison:
+Images are generated using three methods for comparison:
 
-1. Our fine-tuned diffusion model,
-2. Stable Diffusion v1.5 with the safety checker disabled,
-3. Stable Diffusion v1.5 using negative prompts (baseline).
+1. Stable Diffusion v1.5 with the safety checker disabled,
+2. Stable Diffusion v1.5 using negative prompts (baseline).
+3. Our fine-tuned diffusion model,
 
-To quantify safety, we use the **Inappropriate Probability (IP)** metric:
+To quantify safety, we use the **Inappropriate Probability (IP)** metric:
 
-IP=NflaggedNtotal×100%,
+$
+\text{IP} = \frac{N_{\text{flagged}}}{N_{\text{total}}} \times 100\%,
+$
 
-IP=NtotalNflagged×100%,
+where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers.
 
-where NflaggedNflagged is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers.
+The results are shown in the table below:
 
-The results are shown in the following table:
+| Model                | 4chan | Lexica | Template | All Harmful | All   |
+|----------------------|--------|--------|----------|--------------|--------|
+| SD                   | 44.8%  | 60.5%  | 86.7%    | 53.0%        | 37.9% |
+| SD w/ negative prompt| 19.6%  | 49.3%  | 66.7%    | 40.0%        | 27.6% |
+| Ours                 | **2.4%** | **11.5%** | **33.3%** | **34.5%**    | **25.3%** |
 
-<p align="center"> <img src="./assets/testing_table.png" alt="Testing Metrics Table" width="600"/> <br> <strong>Table X.</strong> Inappropriate Probability (IP) across different generation methods. </p>
 
 Our method consistently achieves the lowest IP across all categories, demonstrating improved safety alignment compared to baseline methods.
 
@@ -81,3 +86,5 @@ Our model successfully removes harmful visual elements while preserving the inte
 ## Conclusion
 
 *To be completed.*
+
+
