@@ -1,7 +1,9 @@
-title: ""          # Hides the repo name
-show_downloads: false
-theme: jekyll-theme-cayman
-include: ["_includes/head.html"]     # <-- Enable the custom head
+title: ""                     # optional
+theme: jekyll-theme-cayman    # any official theme is fine
+show_downloads: false         # optional
+
 markdown: kramdown
 kramdown:
-  math_engine: katex
+  math_engine: katex          # <— tells kramdown to hand math to KaTeX
+
+include: ["_includes/head-custom.html"]
