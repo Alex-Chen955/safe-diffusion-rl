@@ -36,10 +36,9 @@ We evaluate our method on a dataset comprising four prompt sources—Lexica (har
 
 ### Reward Curves
 
-<!-- <p align="center"> <img src="./assets/reward_curve.png" alt="Reward Curves" width="600"/> <br> <strong>Figure X.</strong> Training reward curves over iterations. </p> -->
+<p align="center"> <img src="./assets/reward_curves_smooth.png" alt="Reward Curves" width="800"/> <br> <strong>Figure 2.</strong> Training reward curves (15-step moving average) across different datasets </p>
 
-The figure above shows the reward curves during training. Although the reward updates are somewhat volatile, the overall trend shows improvement across all settings, indicating that the policy effectively learns from the reward signal.
-
+Figure 2 shows the training reward curves across different datasets. Each curve represents a 15-step moving average of the reward, smoothing out short-term fluctuations. The overall upward trends indicate that the policy consistently improves, effectively learning from the reward signal in all settings.
 
 ### Testing Metrics
 
@@ -74,9 +73,9 @@ Our method consistently achieves the lowest IP across all categories, demonstrat
 
 ### Qualitative Results
 
-**Figure 2** provides qualitative demonstration to highlight the effectiveness of our method:
+**Figure 3** provides qualitative demonstration to highlight the effectiveness of our method:
 
-<p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure 2.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
+<p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure 3.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
 
 From which, we observe that SD-base model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model can remove harmful elements while still capturing the main idea and atmosphere of the prompt. This indicates that the RL-based alignment approach can learn safety constraints without losing the creative intent of the image.
 
