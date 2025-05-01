@@ -38,7 +38,7 @@ We evaluate our method on a dataset comprising four prompt sources—Lexica (har
 
 <p align="center"> <img src="./assets/reward_curves_smooth.png" alt="Reward Curves" width="800"/> <br> <strong>Figure 2.</strong> Training reward curves (15-step moving average) across different datasets </p>
 
-Figure 2 shows the training reward curves across different datasets. Each curve represents a 15-step moving average of the reward, smoothing out short-term fluctuations. The overall upward trends indicate that the policy consistently improves, effectively learning from the reward signal in all settings.
+**Figure 2** shows the training reward curves across different datasets. Each curve represents a 15-step moving average of the reward, smoothing out short-term fluctuations. The overall upward trends indicate that the policy consistently improves, effectively learning from the reward signal in all settings.
 
 ### Testing Metrics
 
