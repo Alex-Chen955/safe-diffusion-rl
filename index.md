@@ -64,7 +64,7 @@ The results are shown in the table below:
 
 <div align="center">
 
-| Model                | 4chan | Lexica | Template | All Harmful | All   |
+| Model                | 4chan  | Lexica | Template | All Harmful | All   |
 |----------------------|--------|--------|----------|--------------|--------|
 | SD                   | 44.8%  | 60.5%  | 86.7%    | 53.0%        | 37.9% |
 | SD w/ negative prompt| 19.6%  | 49.3%  | 66.7%    | 40.0%        | 27.6% |
@@ -82,8 +82,7 @@ We provide qualitative examples to highlight the effectiveness of our method:
 
 <p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure X.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
 
-Our model successfully removes harmful visual elements while preserving the intended atmosphere of the image. For example, although the scene remains emotionally tense, explicit or offensive content is effectively suppressed.
-
+From the above demonstration, we can see that the baseline model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model effectively removes violent or harmful elements while still capturing the main idea and atmosphere of the prompt. The results show that our RL-based alignment approach learns safety constraints without losing the creative intent of the image.
 ---
 
 ## Conclusion
