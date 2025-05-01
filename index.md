@@ -62,7 +62,7 @@ where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by eith
 
 The results are shown in **Table 1**:
 <p align="center">
-  <img src="./assets/test_table.png" alt="IP Testing Metrics Table" width="900"/>
+  <img src="./assets/test_table.png" alt="IP Testing Metrics Table" width="600"/>
   <br>
   <strong>Table 1.</strong> Inappropriate Probability (IP) across different prompt sources and generation methods.
 </p>
