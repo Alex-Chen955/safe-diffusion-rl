@@ -46,19 +46,19 @@ The figure above shows the reward curves during training. Although the reward up
 
 ### Testing Metrics
 
-Images are generated using three methods for comparison:
+Images are generated five times for each prompt using the following three methods:
 
 1. Stable Diffusion v1.5 with the safety checker disabled,
 2. Stable Diffusion v1.5 using negative prompts (baseline).
-3. Our fine-tuned diffusion model,
+3. Our fine-tuned diffusion model
 
 To quantify safety, we use the **Inappropriate Probability (IP)** metric:
 
-$
-\text{IP} = \frac{N_{\text{flagged}}}{N_{\text{total}}} \times 100\%,
-$
+$$
+\text{IP} = \frac{N_{\text{flagged}}}{N_{\text{total}}} \times 100\%
+$$
 
-where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers.
+where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers,  $N_{\text{total}}\$ is the total number of image being generated.
 
 The results are shown in the table below:
 
