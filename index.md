@@ -2,14 +2,14 @@
 
 ## Introduction and Motivation
 
-Text-to-image (T2I) diffusion models such as Stable Diffusion turn natural-language prompts into photorealistic images, yet the same models can also produce disallowed content—sexual, violent, or hateful scenes—with little friction.
+Text-to-image (T2I) diffusion models such as Stable Diffusion [1] turn natural-language prompts into photorealistic images, yet the same models can also produce disallowed content—sexual, violent, or hateful scenes—with little friction.
 
 Mitigation strategies to date fall into two broad categories:
 
-1. **Detection-based approaches.** A safety checker inspects each generated image and replaces any that are flagged as unsafe with a blank frame. While straightforward, this wastes computation and frustrates users by returning only a generic “content blocked” message.
-2. **Guidance-based approaches.** Techniques such as negative prompting attempt to suppress risky concepts before inference. These ad-hoc edits frequently distort user intent and still cannot guarantee compliance with policy.
+1. **Detection-based approaches.** A safety checker [2] inspects each generated image and replaces any that are flagged as unsafe with a blank frame. While straightforward, this wastes computation and frustrates users by returning only a generic “content blocked” message.
+2. **Guidance-based approaches.** Techniques such as negative prompting [1] attempt to suppress risky concepts during the inference phase. These ad-hoc edits frequently distort user intent and still cannot guarantee compliance with policy.
 
-Both defenses are easy to bypass and can be disabled when model weights are openly released. In contrast, large language models (LLMs) undergo rigorous alignment procedures before deployment. To bridge this gap, we propose a third approach: model-level alignment. Rather than filtering outputs or suppressing risky inputs, we fine-tune Stable Diffusion using reinforcement learning (RL). A frozen harmful-content detector provides the reward signal—unsafe generations receive zero reward, while safe outputs are rewarded. We aim to train the model to internalize safety constraints and generate policy-compliant images with minimal impact on user experience.
+Additionally, both defenses are easy to bypass and can be disabled when model weights are openly released. In contrast, large language models (LLMs) undergo rigorous alignment procedures before deployment. To bridge this gap, we propose a third approach: model-level alignment. Rather than filtering outputs or suppressing risky inputs, we fine-tune Stable Diffusion using reinforcement learning (RL). A frozen harmful-content detector provides the reward signal—unsafe generations receive zero reward, while safe outputs are rewarded. We aim to train the model to internalize safety constraints and generate policy-compliant images with minimal impact on user experience.
 
 ## Methodology
 
@@ -20,9 +20,9 @@ Both defenses are easy to bypass and can be disabled when model weights are open
 </p>
 
 
-The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompts, the diffusion model generates images that are evaluated by two pre-trained safety classifiers: NudeNet and Q16. If either classifier flags the image as harmful, the output receives a reward of 0; if both classifiers pass the image, it receives a reward of 1. The diffusion model is subsequently fine-tuned using RL with Low-Rank Adaptation (LoRA) to minimize harmful generations.
+The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompts, the diffusion model generates images that are evaluated by two pre-trained safety classifiers: NudeNet [3] and Q16 [4]. If either classifier flags the image as harmful, the output receives a reward of 0; if both classifiers pass the image, it receives a reward of 1. The diffusion model is subsequently fine-tuned using RL with Low-Rank Adaptation (LoRA) to minimize harmful generations.
 
-Our method builds upon Denoising Diffusion Policy Optimization (DDPO), which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$.
+Our method builds upon Denoising Diffusion Policy Optimization (DDPO) [5], which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$.
 
 To optimize the diffusion model, we use the following DDPO policy gradient estimator:
 
@@ -32,7 +32,7 @@ To optimize the diffusion model, we use the following DDPO policy gradient estim
 
 ## Experimental Results
 
-We evaluate our method on a dataset comprising four prompt sources: Lexica (harmful), Template (harmful), 4chan (harmful), and COCO (harmless). Experiments are conducted on each individual harmful dataset, their combined set, and the full dataset including both harmful and harmless prompts. A 90/10 train-test split is used throughout.
+We evaluate our method on a dataset comprising four prompt sources—Lexica (harmful), Template (harmful), 4chan (harmful), and COCO (harmless)—all of which are derived from the work in [6]. Experiments are conducted on each individual harmful dataset, their combined set, and the full dataset including both harmful and harmless prompts. A 90/10 train-test split is used throughout.
 
 ### Reward Curves
 
@@ -40,7 +40,6 @@ We evaluate our method on a dataset comprising four prompt sources: Lexica (harm
 
 The figure above shows the reward curves during training. Although the reward updates are somewhat volatile, the overall trend shows improvement across all settings, indicating that the policy effectively learns from the reward signal.
 
----
 
 ### Testing Metrics
 
@@ -58,7 +57,7 @@ To quantify safety, we use the **Inappropriate Probability (IP)** metric:
 
 where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers,  $N_{\text{total}}\$ is the total number of image being generated.
 
-The results are shown in the table below:
+The results are summarized in the table below:
 
 <!-- <div align="center"> -->
 
@@ -72,7 +71,6 @@ The results are shown in the table below:
 
 Our method consistently achieves the lowest IP across all categories, demonstrating improved safety alignment compared to baseline methods.
 
----
 
 ### Qualitative Results
 
@@ -83,10 +81,20 @@ Our method consistently achieves the lowest IP across all categories, demonstrat
 From which, we observe that the baseline model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model can remove harmful elements while still capturing the main idea and atmosphere of the prompt. This indicates that the RL-based alignment approach can learn safety constraints without losing the creative intent of the image.
 
 
----
 
 ## Conclusion
 
-In this work, we demonstrated that reinforcement learning can effectively fine-tune diffusion models for safe image generation, aligning generated content with safety guidelines while minimally impacting semantic fidelity. Unlike traditional detection-based or guidance-based methods, our approach internalizes safety constraints through feedback from pre-trained harmful-content classifiers. Experimental results showed consistent improvement in safety metrics across various prompt datasets, without significant loss of creativity or prompt adherence. 
+In this work, we demonstrated that reinforcement learning can effectively fine-tune diffusion models for safe image generation, aligning outputs with safety guidelines while preserving semantic fidelity. Unlike detection- or guidance-based methods, our approach internalizes safety constraints through feedback from pre-trained harmful-content classifiers. Experiments show consistent improvements in safety metrics across diverse prompts, without compromising creativity or prompt relevance.
 
 
+[1] Rombach, Robin, et al. "High-resolution image synthesis with latent diffusion models." Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2022.
+
+[2] Rando, Javier, et al. "Red-teaming the stable diffusion safety filter." arXiv preprint arXiv:2210.04610 (2022).
+
+[3] https://github.com/notAI-tech/NudeNet
+
+[4] Schramowski, Patrick, Christopher Tauchmann, and Kristian Kersting. "Can machines help us answering question 16 in datasheets, and in turn reflecting on inappropriate content?." Proceedings of the 2022 ACM conference on fairness, accountability, and transparency. 2022.
+
+[5] Black, Kevin, et al. "Training diffusion models with reinforcement learning." arXiv preprint arXiv:2305.13301 (2023).
+
+[6] Qu, Yiting, et al. "Unsafe diffusion: On the generation of unsafe images and hateful memes from text-to-image models." Proceedings of the 2023 ACM SIGSAC conference on computer and communications security. 2023.
