@@ -1,4 +1,4 @@
-# Fine-tuning diffusion models for safe text to image generation through reinforcement leanring
+# Fine-tuning diffusion models for safe text to image generation through reinforcement learning
 
 ## Introduction and Motivation
 
