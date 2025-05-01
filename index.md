@@ -86,12 +86,12 @@ From which, we observe that the baseline model often produces images with explic
 
 In this work, we demonstrated that reinforcement learning can effectively fine-tune diffusion models for safe image generation, aligning outputs with safety guidelines while preserving semantic fidelity. Unlike detection- or guidance-based methods, our approach internalizes safety constraints through feedback from pre-trained harmful-content classifiers. Experiments show consistent improvements in safety metrics across diverse prompts, without compromising creativity or prompt relevance.
 
-
+## References
 [1] Rombach, Robin, et al. "High-resolution image synthesis with latent diffusion models." Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2022.
 
 [2] Rando, Javier, et al. "Red-teaming the stable diffusion safety filter." arXiv preprint arXiv:2210.04610 (2022).
 
-[3] https://github.com/notAI-tech/NudeNet
+[3] notAI.tech. NudeNet: lightweight Nudity detection. GitHub repository. Available at: https://github.com/notAI-tech/NudeNet
 
 [4] Schramowski, Patrick, Christopher Tauchmann, and Kristian Kersting. "Can machines help us answering question 16 in datasheets, and in turn reflecting on inappropriate content?." Proceedings of the 2022 ACM conference on fairness, accountability, and transparency. 2022.
 
