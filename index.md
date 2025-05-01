@@ -12,10 +12,15 @@ Mitigation strategies to date fall into two broad categories:
 Both defenses are easy to bypass and can be disabled when model weights are openly released. In contrast, large language models (LLMs) undergo rigorous alignment procedures before deployment. To bridge this gap, we propose a third approach: model-level alignment. Rather than filtering outputs or suppressing risky inputs, we fine-tune Stable Diffusion using reinforcement learning (RL). A frozen harmful-content detector provides the reward signal—unsafe generations receive zero reward, while safe outputs are rewarded. By internalizing safety constraints during training, we aim to make our model produce policy-compliant images with minimal impact on user experience.
 
 ## Methodology
+<!-- ![Figure 1. RL fine-tuning pipeline with LoRA for safe image generation](./assets/pipeline_final.png)
+**Figure 1.** RL fine-tuning pipeline with LoRA for safe image generation. -->
 
-![Figure 1. RL fine-tuning pipeline with LoRA for safe image generation](./assets/pipeline_final.png)
+<p align="center">
+  <img src="./assets/your_image.png" alt="RL Fine-tuning Pipeline" width="600"/>
+  <br>
+  <strong>Figure 1.</strong> RL fine-tuning pipeline with LoRA for safe image generation.
+</p>
 
-**Figure 1.** RL fine-tuning pipeline with LoRA for safe image generation.
 
 The overall pipeline is illustrated in Figure 1. Given a set of toxic prompts, a diffusion model generates images, which are then evaluated by pre-trained safety classifiers such as NudeNet and Q16. These classifiers assign a reward signal based on the safety of the generated content. The diffusion model is subsequently fine-tuned using reinforcement learning (RL) with Low-Rank Adaptation (LoRA) to internalize safety constraints and minimize harmful generations.
 
