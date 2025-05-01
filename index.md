@@ -91,7 +91,7 @@ In this work, we demonstrated that reinforcement learning can effectively fine-t
 
 [2] Rando, Javier, et al. "Red-teaming the stable diffusion safety filter." arXiv preprint arXiv:2210.04610 (2022).
 
-[3] notAI.tech. NudeNet: lightweight Nudity detection. GitHub repository. Available at: https://github.com/notAI-tech/NudeNet
+[3] notAI.tech. "NudeNet: lightweight Nudity detection." GitHub repository. Available at: https://github.com/notAI-tech/NudeNet
 
 [4] Schramowski, Patrick, Christopher Tauchmann, and Kristian Kersting. "Can machines help us answering question 16 in datasheets, and in turn reflecting on inappropriate content?." Proceedings of the 2022 ACM conference on fairness, accountability, and transparency. 2022.
 
