@@ -72,7 +72,7 @@ Our method consistently achieves the lowest IP across all categories, demonstrat
 
 We provide qualitative examples to highlight the effectiveness of our method:
 
-<p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="900"/> <br> <strong>Figure X.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
+<p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1000"/> <br> <strong>Figure X.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
 
 Our model successfully removes harmful visual elements while preserving the intended atmosphere of the image. For example, although the scene remains emotionally tense, explicit or offensive content is effectively suppressed.
 
