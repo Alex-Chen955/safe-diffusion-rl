@@ -20,9 +20,9 @@ Additionally, both defenses are easy to bypass and can be disabled when model we
 </p>
 
 
-The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompts, the diffusion model generates images that are evaluated by two pre-trained safety classifiers: NudeNet [3] and Q16 [4]. If either classifier flags the image as harmful, the output receives a reward of 0; if both classifiers pass the image, it receives a reward of 1. The diffusion model is subsequently fine-tuned using RL with Low-Rank Adaptation (LoRA) to minimize harmful generations.
+The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompts, the diffusion model generates images that are evaluated by two pre-trained safety classifiers: NudeNet [3] and Q16 [4]. If either classifier flags the image as harmful, the output receives a reward of 0; if both classifiers pass the image, it receives a reward of 1. The diffusion model is subsequently fine-tuned using RL with Low-Rank Adaptation (LoRA) [5] to minimize harmful generations.
 
-Our method builds upon Denoising Diffusion Policy Optimization (DDPO) [5], which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$.
+Our method builds upon Denoising Diffusion Policy Optimization (DDPO) [6], which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$.
 
 To optimize the diffusion model, we use the following DDPO policy gradient estimator:
 
@@ -32,7 +32,7 @@ To optimize the diffusion model, we use the following DDPO policy gradient estim
 
 ## Experimental Results
 
-We evaluate our method on a dataset comprising four prompt sources—Lexica (harmful), Template (harmful), 4chan (harmful), and COCO (harmless)—all of which are derived from the work in [6]. Experiments are conducted on each individual harmful dataset, their combined set, and the full dataset including both harmful and harmless prompts. A 90/10 train-test split is used throughout.
+We evaluate our method on a dataset comprising four prompt sources—Lexica (harmful), Template (harmful), 4chan (harmful), and COCO (harmless)—all of which are derived from the work in [7]. Experiments are conducted on each individual harmful dataset, their combined set, and the full dataset including both harmful and harmless prompts. A 90/10 train-test split is used throughout.
 
 ### Reward Curves
 
@@ -95,6 +95,8 @@ In this work, we demonstrated that reinforcement learning can effectively fine-t
 
 [4] Schramowski, Patrick, Christopher Tauchmann, and Kristian Kersting. "Can machines help us answering question 16 in datasheets, and in turn reflecting on inappropriate content?." Proceedings of the 2022 ACM conference on fairness, accountability, and transparency. 2022.
 
-[5] Black, Kevin, et al. "Training diffusion models with reinforcement learning." arXiv preprint arXiv:2305.13301 (2023).
+[5] Hu, Edward J., et al. "Lora: Low-rank adaptation of large language models." ICLR 1.2 (2022): 3.
 
-[6] Qu, Yiting, et al. "Unsafe diffusion: On the generation of unsafe images and hateful memes from text-to-image models." Proceedings of the 2023 ACM SIGSAC conference on computer and communications security. 2023.
+[6] Black, Kevin, et al. "Training diffusion models with reinforcement learning." arXiv preprint arXiv:2305.13301 (2023).
+
+[7] Qu, Yiting, et al. "Unsafe diffusion: On the generation of unsafe images and hateful memes from text-to-image models." Proceedings of the 2023 ACM SIGSAC conference on computer and communications security. 2023.
