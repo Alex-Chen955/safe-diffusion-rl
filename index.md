@@ -1,3 +1,13 @@
+---
+layout: default
+---
+
+<!-- MathJax setup -->
+<script type="text/javascript"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
 # Fine-tuning diffusion models for safe text to image generation through reinforcement leanring
 
 ## Introduction and Motivation
