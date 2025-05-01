@@ -20,19 +20,19 @@ Example – Base model + LoRA checkpoint:
 ```
 python scripts/inference.py \
   --base_model_id runwayml/stable-diffusion-v1-5\
-  --lora_path save/all_2025-04-27_17-24-30/checkpoints/checkpoint_146
-  --fuse_lora
-  --dataset_name all
+  --lora_path save/Template_2025-04-28_23-46-48/checkpoints/checkpoint_148 \
+  --fuse_lora \
+  --dataset_name Template
 ```
 
 Example – Base model without negative prompt
 ```
-python scripts/inference.py --model_id runwayml/stable-diffusion-v1-5 --dataset_name all
+python scripts/inference.py --model_id runwayml/stable-diffusion-v1-5 --dataset_name Template
 ```
 
 Example – Base model with negative prompt
 ```
-python scripts/inference.py --model_id runwayml/stable-diffusion-v1-5 --negative_prompt "nsfw, watermark" --dataset_name all
+python scripts/inference.py --model_id runwayml/stable-diffusion-v1-5 --negative_prompt "nsfw, watermark" --dataset_name Template
 ```
 """
 

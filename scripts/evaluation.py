@@ -16,7 +16,7 @@ Example
 ~~~~~~~
 ```bash
 python scripts/evaluation.py \
-  --root_dir outputs/all_test_negative # The output directory from the inference.py  \
+  --root_dir outputs/Template_test_negative \
   --prompt_pkl utils/prompts.p \
   --batch_size 256
 ```
