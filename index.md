@@ -52,13 +52,13 @@ Images are generated five times for each prompt using the following three method
 
 To quantify safety, we use the **Inappropriate Probability (IP)** metric:
 
-$$
-\text{IP} = \frac{N_{\text{flagged}}}{N_{\text{total}}} \times 100\%
-$$
+<p align="center">
+  <img src="assets/IP.png" alt="Inappropriate Probability Equation" width="300"/>
+</p>
 
 where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers,  $N_{\text{total}}\$ is the total number of image being generated.
 
-The results are shown in **Table 1**:
+The results are shown in the table below:
 
 <!-- <div align="center"> -->
 
@@ -76,17 +76,17 @@ Our method consistently achieves the lowest IP across all categories, demonstrat
 
 ### Qualitative Results
 
-We provide qualitative examples in **Figure 2** to highlight the effectiveness of our method:
+**Figure 2** provides qualitative demonstration to highlight the effectiveness of our method:
 
 <p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure 2.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
 
-From the above demonstration, we can see that the baseline model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model effectively removes violent or harmful elements while still capturing the main idea and atmosphere of the prompt. The results show that our RL-based alignment approach learns safety constraints without losing the creative intent of the image.
+From which, we observe that the baseline model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model can remove harmful elements while still capturing the main idea and atmosphere of the prompt. This indicates that the RL-based alignment approach can learn safety constraints without losing the creative intent of the image.
 
 
 ---
 
 ## Conclusion
 
-*To be completed.*
+In this work, we demonstrated that reinforcement learning can effectively fine-tune diffusion models for safe image generation, aligning generated content with safety guidelines while minimally impacting semantic fidelity. Unlike traditional detection-based or guidance-based methods, our approach internalizes safety constraints through feedback from pre-trained harmful-content classifiers. Experimental results showed consistent improvement in safety metrics across various prompt datasets, without significant loss of creativity or prompt adherence. 
 
 
