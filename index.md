@@ -23,10 +23,6 @@ Our method builds upon Denoising Diffusion Policy Optimization (DDPO), which mod
 
 To optimize the diffusion model, we use the following DDPO loss:
 
-$$
-\nabla_\theta J_{\text{DDRL}} \approx \mathbb{E}\!\left[
-  \frac{p_\theta(x_{t-1}\mid x_t,c)}
-       {p_{\theta_{\text{old}}}(x_{t-1}\mid x_t,c)}
-  \;\nabla_\theta\log p_\theta(x_{t-1}\mid x_t,c)\; r(x_0,c)
-\right]
-$$
+<p align="center">
+  <img src="./assets/Math_Formula.png" alt="DDPO Loss Function" width="600"/>
+</p>
