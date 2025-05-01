@@ -44,8 +44,8 @@ We evaluate our method on a dataset comprising four prompt sources—Lexica (har
 
 Images are generated five times for each prompt using the following three methods:
 
-1. Stable Diffusion v1.5 with the safety checker disabled,
-2. Stable Diffusion v1.5 using negative prompts (baseline).
+1. Stable Diffusion v1.5 with the safety checker disabled
+2. Stable Diffusion v1.5 using negative prompts (baseline)
 3. Our fine-tuned diffusion model
 
 To quantify safety, we use the **Inappropriate Probability (IP)** metric:
