@@ -16,7 +16,7 @@ Both defenses are easy to bypass and can be disabled when model weights are open
 **Figure 1.** RL fine-tuning pipeline with LoRA for safe image generation. -->
 
 <p align="center">
-  <img src="./assets/pipeline_final.png" alt="RL Fine-tuning Pipeline" width="600"/>
+  <img src="./assets/pipeline_final.png" alt="RL Fine-tuning Pipeline" width="800"/>
   <br>
   <strong>Figure 1.</strong> RL fine-tuning pipeline with LoRA for safe image generation.
 </p>
