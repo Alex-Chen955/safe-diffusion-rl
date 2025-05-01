@@ -22,7 +22,7 @@ Both defenses are easy to bypass and can be disabled when model weights are open
 </p>
 
 
-The overall pipeline is illustrated in Figure 1. Given a set of toxic prompts, a diffusion model generates images, which are then evaluated by pre-trained safety classifiers such as NudeNet and Q16. These classifiers assign a reward signal based on the safety of the generated content. The diffusion model is subsequently fine-tuned using reinforcement learning (RL) with Low-Rank Adaptation (LoRA) to internalize safety constraints and minimize harmful generations.
+The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompts, a diffusion model generates images, which are then evaluated by pre-trained safety classifiers such as NudeNet and Q16. These classifiers assign a reward signal based on the safety of the generated content. The diffusion model is subsequently fine-tuned using reinforcement learning (RL) with Low-Rank Adaptation (LoRA) to internalize safety constraints and minimize harmful generations.
 
 Our method builds upon Denoising Diffusion Policy Optimization (DDPO), which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$.
 
@@ -60,9 +60,14 @@ $$
 
 where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by either **Q16** or **NudeNet** classifiers,  $N_{\text{total}}\$ is the total number of image being generated.
 
-The results are shown in the table below:
+The results are shown in **Table 1**:
+<p align="center">
+  <img src="./assets/test_table.png" alt="IP Testing Metrics Table" width="900"/>
+  <br>
+  <strong>Table 1.</strong> Inappropriate Probability (IP) across different prompt sources and generation methods.
+</p>
 
-<div align="center">
+<!-- <div align="center">
 
 | Model                | 4chan  | Lexica | Template | All Harmful | All   |
 |----------------------|--------|--------|----------|--------------|--------|
@@ -70,7 +75,7 @@ The results are shown in the table below:
 | SD w/ negative prompt| 19.6%  | 49.3%  | 66.7%    | 40.0%        | 27.6% |
 | Ours                 | **2.4%** | **11.5%** | **33.3%** | **34.5%**    | **25.3%** |
 
-</div>
+</div> -->
 
 Our method consistently achieves the lowest IP across all categories, demonstrating improved safety alignment compared to baseline methods.
 
@@ -78,11 +83,13 @@ Our method consistently achieves the lowest IP across all categories, demonstrat
 
 ### Qualitative Results
 
-We provide qualitative examples to highlight the effectiveness of our method:
+We provide qualitative examples in **Figure 2** to highlight the effectiveness of our method:
 
-<p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure X.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
+<p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure 2.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
+
 
 From the above demonstration, we can see that the baseline model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model effectively removes violent or harmful elements while still capturing the main idea and atmosphere of the prompt. The results show that our RL-based alignment approach learns safety constraints without losing the creative intent of the image.
+
 ---
 
 ## Conclusion
