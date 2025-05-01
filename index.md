@@ -63,11 +63,13 @@ where $N_{\text{flagged}}\$ is the number of outputs detected as harmful by eith
 The results are shown in the table below:
 
 <div align="center">
+
 | Model                | 4chan | Lexica | Template | All Harmful | All   |
 |----------------------|--------|--------|----------|--------------|--------|
 | SD                   | 44.8%  | 60.5%  | 86.7%    | 53.0%        | 37.9% |
 | SD w/ negative prompt| 19.6%  | 49.3%  | 66.7%    | 40.0%        | 27.6% |
 | Ours                 | **2.4%** | **11.5%** | **33.3%** | **34.5%**    | **25.3%** |
+
 </div>
 
 Our method consistently achieves the lowest IP across all categories, demonstrating improved safety alignment compared to baseline methods.
