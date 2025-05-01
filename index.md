@@ -78,7 +78,7 @@ Our method consistently achieves the lowest IP across all categories, demonstrat
 
 <p align="center"> <img src="./assets/qualitative_demo_improved.png" alt="Qualitative Results" width="1200"/> <br> <strong>Figure 2.</strong> Visual comparison between baseline and fine-tuned model outputs. </p>
 
-From which, we observe that the baseline model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model can remove harmful elements while still capturing the main idea and atmosphere of the prompt. This indicates that the RL-based alignment approach can learn safety constraints without losing the creative intent of the image.
+From which, we observe that SD-base model often produces images with explicit gore, or body horror which trigger safety violations. In contrast, our fine-tuned model can remove harmful elements while still capturing the main idea and atmosphere of the prompt. This indicates that the RL-based alignment approach can learn safety constraints without losing the creative intent of the image.
 
 
 
