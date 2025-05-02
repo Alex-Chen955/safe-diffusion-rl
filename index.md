@@ -1,12 +1,13 @@
 # Fine-tuning diffusion models for safe text to image generation through reinforcement learning
 
-<p align="center">
-<strong>Team Members</strong><br>
-Yuxuan Chen &nbsp;|&nbsp; NetID: yc7087<br>
-Tingyuan Lu &nbsp;|&nbsp; NetID: tl4133<br>
-Zhuoran Peng &nbsp;|&nbsp; NetID: zp2019<br>
-Xiang Pan &nbsp;|&nbsp; NetID: xp2030
-</p>
+**Course Project**: CSCI-GA 3033-090: Deep Decision Making and Reinforcement Learning  
+**Institution**: New York University  
+
+**Authors**:  
+Yuxuan Chen (yc7087@nyu.edu)  
+Tingyuan Lu (tl4133@nyu.edu)  
+Zhuoran Peng (zp2019@nyu.edu)  
+Xiang Pan (xp2030@nyu.edu)
 
 ## Introduction and Motivation
 
