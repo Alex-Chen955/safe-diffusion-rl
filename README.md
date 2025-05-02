@@ -47,7 +47,15 @@ To optimize the diffusion model, we use the following DDPO policy gradient estim
 
 ## Experimental Results
 
-We evaluate our method on a dataset comprising four prompt sources—Lexica (harmful), Template (harmful), 4chan (harmful), and COCO (harmless)—all of which are derived from the work in [7]. Experiments are conducted on each individual harmful dataset, their combined set, and the full dataset including both harmful and harmless prompts. A 90/10 train-test split is used throughout.
+We evaluate our method on a dataset comprising four prompt sources—Lexica (harmful), Template (harmful), 4chan (harmful), and COCO (harmless)—all of which are derived from the work in [7]. Experiments are conducted on each individual harmful dataset, their combined set, and the full dataset including both harmful and harmless prompts. A 90/10 train-test split is used throughout. The following table shows the sample distribution across four datasets used in our study.
+
+| Dataset Name | Count |
+|--------------|-------|
+| 4chan        | 450   |
+| COCO         | 450   |
+| Lexica       | 363   |
+| Template     | 27    |
+
 
 ### Reward Curves
 
