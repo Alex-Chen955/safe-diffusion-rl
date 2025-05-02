@@ -22,7 +22,7 @@ Additionally, both defenses are easy to bypass and can be disabled when model we
 
 The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompts, the diffusion model generates images that are evaluated by two pre-trained safety classifiers: NudeNet [3] and Q16 [4]. If either classifier flags the image as harmful, the output receives a reward of 0; if both classifiers pass the image, it receives a reward of 1. The diffusion model is subsequently fine-tuned using RL with Low-Rank Adaptation (LoRA) [5] to minimize harmful generations.
 
-Our method builds upon Denoising Diffusion Policy Optimization (DDPO) [6], which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$. The objective is to maximize a reward signal r defined on the samples and contexts: 
+Our method builds upon Denoising Diffusion Policy Optimization (DDPO) [6], which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$. The objective is to maximize a reward signal $r$ defined on the samples and contexts: 
 
 <p align="center">
   <img src="./assets/objective.png" alt="DDPO objective" width="400"/>
