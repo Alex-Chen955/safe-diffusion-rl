@@ -25,7 +25,7 @@ The overall pipeline is illustrated in **Figure 1**. Given a set of toxic prompt
 Our method builds upon Denoising Diffusion Policy Optimization (DDPO) [6], which models the denoising process as a multi-step Markov Decision Process (MDP). In this formulation, each state corresponds to a tuple $(c, t, x_t)$, the action is the denoised sample $x_{t-1}$, and the reward is only assigned at the final step based on the generated image $x_0$. The objective is to maximize a reward signal r defined on the samples and contexts: 
 
 <p align="center">
-  <img src="./assets/objective.png" alt="DDPO objective" width="500"/>
+  <img src="./assets/objective.png" alt="DDPO objective" width="400"/>
 </p>
 
 for some context distribution $p(c)$.
