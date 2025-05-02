@@ -1,5 +1,13 @@
 # Fine-tuning diffusion models for safe text to image generation through reinforcement learning
 
+<p align="center">
+<strong>Team Members</strong><br>
+Yuxuan Chen &nbsp;|&nbsp; NetID: yc7087<br>
+Tingyuan Lu &nbsp;|&nbsp; NetID: tl4133<br>
+Zhuoran Peng &nbsp;|&nbsp; NetID: zp2019<br>
+Xiang Pan &nbsp;|&nbsp; NetID: xp2030
+</p>
+
 ## Introduction and Motivation
 
 Text-to-image (T2I) diffusion models such as Stable Diffusion [1] turn natural-language prompts into photorealistic images, yet the same models can also produce disallowed content—sexual, violent, or hateful scenes—with little friction.
