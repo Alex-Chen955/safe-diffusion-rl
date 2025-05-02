@@ -1,8 +1,5 @@
 # Fine-tuning diffusion models for safe text to image generation through reinforcement learning
 
-**Course Project**: CSCI-GA 3033-090: Deep Decision Making and Reinforcement Learning  
-**Institution**: New York University  
-
 **Authors**:  
 Yuxuan Chen (yc7087@nyu.edu)  
 Tingyuan Lu (tl4133@nyu.edu)  
